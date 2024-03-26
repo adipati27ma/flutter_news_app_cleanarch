@@ -1,5 +1,10 @@
 import 'package:equatable/equatable.dart';
 
+// docs: ArticleEntity is a class that extends Equatable.
+// It is used to define the properties of the news article.
+// Equatable is used to compare objects for equality.
+// Equatable is a package that provides a simple way to compare objects in Dart.
+// It is used to compare the properties of the ArticleEntity class with each other. (using "==" operator if without Equatable)
 class ArticleEntity extends Equatable {
   final int? id;
   final String? author;

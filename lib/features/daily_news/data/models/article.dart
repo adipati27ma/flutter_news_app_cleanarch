@@ -1,5 +1,7 @@
 import 'package:flutter_news_app_cleanarch/features/daily_news/domain/entities/article.dart';
 
+// docs: ArticleModel is a class that extends the ArticleEntity class.
+// It is used to convert the JSON data to the ArticleEntity object (without replacing the Entity Table/Databases if changing).
 class ArticleModel extends ArticleEntity {
   const ArticleModel({
     int? id,

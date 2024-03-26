@@ -7,6 +7,9 @@ import 'package:flutter_news_app_cleanarch/core/resources/data_state.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/domain/entities/article.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/domain/repository/article_repository.dart';
 
+// docs: ArticleRepositoryImpl is a class that implements the ArticleRepository abstract class.
+// It has a constructor that takes the NewsApiService as a parameter.
+// It has only one method getNewsArticles that returns a DataState of List<ArticleModel>.
 class ArticleRepositoryImpl implements ArticleRepository {
   final NewsApiService _newsApiService;
   ArticleRepositoryImpl(this._newsApiService);
