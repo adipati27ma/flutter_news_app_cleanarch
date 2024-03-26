@@ -94,7 +94,9 @@ class ArticleWidget extends StatelessWidget {
           children: [
             // Title
             Text(
-              article!.title ?? '',
+              article!.title == '[Removed]'
+                  ? 'No Data'
+                  : article!.title ?? 'No Data',
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
               style: const TextStyle(
@@ -110,7 +112,9 @@ class ArticleWidget extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(top: 4),
                 child: Text(
-                  article!.description ?? '',
+                  article!.description == '[Removed]'
+                      ? 'Article was removed by the owner'
+                      : article!.description ?? 'Blank Article',
                   maxLines: 2,
                 ),
               ),
