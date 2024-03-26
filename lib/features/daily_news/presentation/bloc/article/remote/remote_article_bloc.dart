@@ -6,7 +6,7 @@ import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/bloc
 
 // docs: implementing the BLoC (Business Logic Component) pattern
 // RemoteArticlesBloc is a BLoC that manages the state of the remote articles
-//*BLoC needs 2 types of classes: Event and State => RemoteArticlesEvent and RemoteArticleState
+// BLoC needs 2 types of classes: Event and State => RemoteArticlesEvent and RemoteArticleState
 // it listens to GetArticles event and fetches the articles from the remote data source
 // it emits RemoteArticlesLoading state when the articles are being fetched (initial state)
 class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
@@ -16,12 +16,14 @@ class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
     on<GetArticles>(onGetArticles);
   }
 
+// docs: Emitter is a class which is capable of emitting new states.
   void onGetArticles(
       GetArticles event, Emitter<RemoteArticleState> emit) async {
     final dataState = await _getArticleUseCase();
 
     // docs: it emits RemoteArticlesDone state when the articles are fetched successfully
     // docs: it emits RemoteArticlesError state when there is an error fetching the articles
+    // "!" is used to remove the null safety warning (indicate non-nullable variable)
     if (dataState is DataSuccess) {
       emit(RemoteArticlesDone(articles: dataState.data!));
     } else if (dataState is DataFailed) {
