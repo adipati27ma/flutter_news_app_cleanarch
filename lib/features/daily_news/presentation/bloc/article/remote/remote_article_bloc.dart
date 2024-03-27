@@ -12,7 +12,8 @@ import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/bloc
 class RemoteArticlesBloc extends Bloc<RemoteArticlesEvent, RemoteArticleState> {
   final GetArticleUseCase _getArticleUseCase;
 
-  RemoteArticlesBloc(this._getArticleUseCase) : super(RemoteArticlesLoading()) {
+  RemoteArticlesBloc(this._getArticleUseCase)
+      : super(const RemoteArticlesLoading()) {
     on<GetArticles>(onGetArticles);
   }
 
