@@ -7,6 +7,7 @@ import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/page
 import 'package:flutter_news_app_cleanarch/injection_container.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   initializeDependencies();
   runApp(const MyApp());
 }

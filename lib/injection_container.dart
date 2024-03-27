@@ -1,6 +1,10 @@
+import 'package:flutter_news_app_cleanarch/features/daily_news/data/data_sources/local/app_database.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/data/repository/article_repository_impl.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/domain/repository/article_repository.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/domain/usecases/get_article.dart';
+import 'package:flutter_news_app_cleanarch/features/daily_news/domain/usecases/get_saved_article.dart';
+import 'package:flutter_news_app_cleanarch/features/daily_news/domain/usecases/remove_article.dart';
+import 'package:flutter_news_app_cleanarch/features/daily_news/domain/usecases/save_article.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:dio/dio.dart';
@@ -23,17 +27,30 @@ final sl = GetIt.instance;
   3. Lazy singleton: when request an instance of the class, the instance will be created only when it is first requested
 */
 Future<void> initializeDependencies() async {
+  final database =
+      await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  sl.registerSingleton<AppDatabase>(database);
+
   // Dio
   sl.registerSingleton<Dio>(Dio());
 
   // Dependencies
   sl.registerSingleton<NewsApiService>(NewsApiService(sl<Dio>()));
   sl.registerSingleton<ArticleRepository>(
-      ArticleRepositoryImpl(sl<NewsApiService>()));
+      ArticleRepositoryImpl(sl<NewsApiService>(), sl<AppDatabase>()));
 
   // Use Cases
   sl.registerSingleton<GetArticleUseCase>(
       GetArticleUseCase(sl<ArticleRepository>()));
+
+  sl.registerSingleton<GetSavedArticleUseCase>(
+      GetSavedArticleUseCase(sl<ArticleRepository>()));
+
+  sl.registerSingleton<SaveArticleUseCase>(
+      SaveArticleUseCase(sl<ArticleRepository>()));
+
+  sl.registerSingleton<RemoveArticleUseCase>(
+      RemoveArticleUseCase(sl<ArticleRepository>()));
 
   // BLoC (Presentation Layer, Factory)
   sl.registerFactory<RemoteArticlesBloc>(
