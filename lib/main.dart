@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_news_app_cleanarch/config/routes/routes.dart';
 import 'package:flutter_news_app_cleanarch/config/theme/app_themes.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/bloc/article/remote/remote_article_bloc.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/bloc/article/remote/remote_article_event.dart';
 import 'package:flutter_news_app_cleanarch/features/daily_news/presentation/pages/home/daily_news.dart';
 import 'package:flutter_news_app_cleanarch/injection_container.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeDependencies();
+  await initializeDependencies();
   runApp(const MyApp());
 }
 
@@ -28,6 +29,7 @@ class MyApp extends StatelessWidget {
         //   useMaterial3: true,
         // ),
         home: const DailyNews(),
+        onGenerateRoute: AppRoutes.onGenerateRoutes,
       ),
     );
   }
