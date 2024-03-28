@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       create: (context) => sl()..add(const GetArticles()),
       child: MaterialApp(
         title: 'Flutter Demo Adip',
+        debugShowCheckedModeBanner: false,
         theme: myCustomTheme(),
         // theme: ThemeData(
         //   colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
